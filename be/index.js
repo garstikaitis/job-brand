@@ -5,14 +5,16 @@ import { default as companiesRouter } from './modules/company/company.controller
 import { default as usersRouter } from './modules/user/user.controller';
 import { default as authRouter } from './modules/auth/auth.controller';
 import { default as authMiddleware } from './modules/auth/auth.middleware';
+import cors from 'cors';
 
 try {
   mongoose.connect('mongodb://localhost/job-brand');
 
   const PORT = process.env.PORT || 3000;
   const app = express();
+  app.use(cors('*'));
 
-  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(bodyParser.urlencoded({ extended: true }));
   app.use('/api', [companiesRouter, usersRouter, authRouter]);
 
   app.get('/', (req, res) => {

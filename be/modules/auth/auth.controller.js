@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.post('/authenticate', async (req, res) => {
   let passwordMatches;
+  console.log(req.body);
   User.findOne({ email: req.body.email }, (err, user) => {
     if (err) throw err;
     if (!user) {
