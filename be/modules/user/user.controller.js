@@ -33,7 +33,6 @@ router.post('/users', async (req, res) => {
 router.post('/users/:id/companies', authMiddleware, async (req, res) => {
   const { id } = req.params;
   const { name } = req.body;
-  console.log(id, name);
   try {
     const { company } = await User.addCompany(id, { name });
     return res.json(company);

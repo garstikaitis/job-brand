@@ -11,6 +11,7 @@ import registerServiceWorker from './registerServiceWorker';
 import Organizations from './pages/Organizations';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
+import Organization from './pages/Organization';
 
 class Root extends React.Component {
   render() {
@@ -24,6 +25,7 @@ class Root extends React.Component {
                 <Route exact path="/" component={Organizations} />
                 <Route exact path="/login" component={LoginPage} />
                 <Route exact path="/signup" component={SignupPage} />
+                <Route exact path="/companies/:id" component={Organization} />
               </Switch>
             </Router>
           </MuiThemeProvider>

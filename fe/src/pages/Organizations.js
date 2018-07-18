@@ -12,6 +12,7 @@ import {
   SvgIcon,
   IconButton,
 } from '../../node_modules/@material-ui/core';
+import CompanyApi from '../utils/CompanyApi';
 
 class Organizations extends Component {
   state = {
@@ -20,13 +21,17 @@ class Organizations extends Component {
     open: false,
     name: '',
     openSD: false,
+    company: {},
   };
   handleModalVisibility = () => {
     this.setState({ open: !this.state.open });
   };
 
   async componentDidMount() {
-    this.setState({ users: await UserApi.getUsers(), loading: false });
+    this.setState({
+      users: await UserApi.getUsers(),
+      loading: false,
+    });
   }
   style = () => {
     return {
@@ -41,7 +46,7 @@ class Organizations extends Component {
   render() {
     return (
       <Grid item xs={12}>
-        <Navbar />
+        <Navbar title="Choose organization" />
         <UserCompaniesWidget />
         <Button
           color="primary"

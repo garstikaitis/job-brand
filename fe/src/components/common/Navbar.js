@@ -9,7 +9,7 @@ class Navbar extends React.Component {
         position="static"
       >
         <Typography variant="title" color="inherit">
-          Choose Organization
+          {this.props.title}
         </Typography>
       </AppBar>
     );

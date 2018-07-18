@@ -21,6 +21,10 @@ class UserCompaniesWidget extends React.Component {
     });
   }
 
+  handleRedirect = id => {
+    window.location.href = `/companies/${id}`;
+  };
+
   renderCompanies = () => {
     if (!this.state.loading) {
       return this.state.user.companies.map(company => {
@@ -31,7 +35,11 @@ class UserCompaniesWidget extends React.Component {
                 <Typography>{company.name}</Typography>
               </CardContent>
               <CardActions>
-                <Button variant="contained" color="secondary">
+                <Button
+                  onClick={() => this.handleRedirect(company._id)}
+                  variant="contained"
+                  color="secondary"
+                >
                   Visit
                 </Button>
               </CardActions>
