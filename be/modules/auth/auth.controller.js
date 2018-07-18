@@ -30,7 +30,7 @@ router.post('/authenticate', async (req, res) => {
               email: user.email,
             };
             const token = jwt.sign(payload, 'secret123123', {
-              expiresIn: 1440, // expires in 24 hours
+              expiresIn: 86400, // expires in 24 hours
             });
             return res.status(200).json({
               success: true,

@@ -15,12 +15,12 @@ router.get('/users', authMiddleware, async (req, res) => {
       .json({ success: false, message: 'Error getting all users' });
   }
 });
-router.post('/users', authMiddleware, async (req, res) => {
+router.post('/users', async (req, res) => {
   try {
-    const { email, password };
+    const { email, password } = req.body;
     const userData = {
-      email: req.body.email,
-      password: req.body.password,
+      email,
+      password,
     };
     const user = await User.create(userData);
     return res.json({ success: true, user });

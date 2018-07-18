@@ -5,21 +5,18 @@ class LoginPage extends React.Component {
   state = {
     email: '',
     password: '',
-    loggedIn: false,
-    token: '',
   };
 
   handleSubmit = async e => {
-    try {
-      const { email, password } = this.state;
-      e.preventDefault();
-      const { success, token } = await AuthApi.authenticate(email, password);
-      console.log(success, token);
-      if (success) {
-        window.localStorage.setItem('x-access-token', token);
-        window.location.href = '/';
-      }
-    } catch (error) {}
+    const { email, password } = this.state;
+    e.preventDefault();
+    const {
+      data: { success },
+    } = await AuthApi.signup(email, password);
+    if (success) {
+      await AuthApi.authenticate(email, password);
+      window.location.href = '/';
+    }
   };
 
   handleKeyUp = e => {
