@@ -1,5 +1,16 @@
 import React from 'react';
 import AuthApi from '../utils/AuthApi';
+import { Link } from 'react-router-dom';
+
+import {
+  Card,
+  CardContent,
+  Grid,
+  TextField,
+  CardHeader,
+  Typography,
+  Button,
+} from '../../node_modules/@material-ui/core';
 
 class LoginPage extends React.Component {
   state = {
@@ -25,26 +36,46 @@ class LoginPage extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          onKeyUp={this.handleKeyUp}
-          type="email"
-          name="email"
-          placeholder="Email"
-        />
-        <input
-          onKeyUp={this.handleKeyUp}
-          type="password"
-          name="password"
-          placeholder="Password"
-        />
-        <input type="submit" />
-        {this.state.loggedIn ? (
-          <div>LoggedIn {this.state.token}</div>
-        ) : (
-          <div>Logged out</div>
-        )}
-      </form>
+      <div style={{ height: '100vh', alignItems: 'center', display: 'flex' }}>
+        <Grid container justify="center">
+          <Card>
+            <CardContent>
+              <CardHeader title="Signup" />
+              <form onSubmit={this.handleSubmit}>
+                <Grid style={{ margin: '10px 0' }} item xs={12}>
+                  <TextField
+                    onKeyUp={this.handleKeyUp}
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                  />
+                </Grid>
+                <Grid style={{ margin: '10px 0' }} item xs={12}>
+                  <TextField
+                    onKeyUp={this.handleKeyUp}
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                  />
+                </Grid>
+                <Grid style={{ margin: '10px 0' }} item xs={12}>
+                  <Button type="submit" variant="contained" color="primary">
+                    Signup
+                  </Button>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography>Already have an accout?</Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography>
+                    <Link to="/login">Login</Link>
+                  </Typography>
+                </Grid>
+              </form>
+            </CardContent>
+          </Card>
+        </Grid>
+      </div>
     );
   }
 }
