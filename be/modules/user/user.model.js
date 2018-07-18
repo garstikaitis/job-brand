@@ -1,16 +1,14 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
-const Company = mongoose.model('Company');
+import { CompanySchema } from '../company/company.model';
 const Schema = mongoose.Schema;
-
-var childSchema = new Schema({ name: 'string' });
 
 const User = new Schema({
   email: String,
   password: String,
   name: String,
   lastName: String,
-  company: { type: mongoose.Schema.Types.ObjectId, ref: 'Company' },
+  companies: [CompanySchema],
 });
 
 User.pre('save', function(next) {
@@ -24,6 +22,15 @@ User.pre('save', function(next) {
     }
   });
 });
+
+User.statics.addCompany = async function(userId, args) {
+  const Company = mongoose.model('Company');
+  const company = await new Company({ ...args });
+  await this.findByIdAndUpdate(userId, { $push: { companies: company } });
+  return {
+    company: await company.save(),
+  };
+};
 
 const UserModel = mongoose.model('User', User);
 

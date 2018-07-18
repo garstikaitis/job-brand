@@ -8,7 +8,7 @@ router.use((req, res, next) => {
   if (token) {
     jwt.verify(token, 'secret123123', (err, decoded) => {
       if (err) {
-        return res.json({
+        return res.status(401).json({
           success: false,
           message: 'Failed to authenticate token.',
         });

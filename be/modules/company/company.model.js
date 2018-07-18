@@ -1,8 +1,10 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
-const Company = new Schema({
+const CompanySchema = new Schema({
   name: String,
 });
 
-export default mongoose.model('Company', Company);
+const Company = mongoose.model('Company', CompanySchema);
+
+export { CompanySchema, Company };

@@ -4,13 +4,14 @@ import Company from './company.model';
 const router = express.Router();
 
 router.get('/companies', async (req, res) => {
-  const companies = await Company.find({});
-  return res.json({ companies });
-});
-router.post('/companies', async (req, res) => {
-  const { name } = req.body;
-  await Company.create({ name });
-  return res.json({ success: true });
+  try {
+    const companies = await Company.find({});
+    return res.json(companies);
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, message: 'Error getting all companies' });
+  }
 });
 
 export default router;

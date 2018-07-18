@@ -7,11 +7,10 @@ const router = express.Router();
 
 router.post('/authenticate', async (req, res) => {
   let passwordMatches;
-  console.log(req.body);
   User.findOne({ email: req.body.email }, (err, user) => {
     if (err) throw err;
     if (!user) {
-      res.json({
+      res.status(500).json({
         success: false,
         message: 'Authentication failed. User not found.',
       });
@@ -22,7 +21,7 @@ router.post('/authenticate', async (req, res) => {
         (err, passwordMatches) => {
           if (err) throw err;
           if (!passwordMatches) {
-            res.json({
+            res.status(500).json({
               success: false,
               message: 'Authentication failed. Wrong password.',
             });
@@ -33,7 +32,7 @@ router.post('/authenticate', async (req, res) => {
             const token = jwt.sign(payload, 'secret123123', {
               expiresIn: 1440, // expires in 24 hours
             });
-            return res.json({
+            return res.status(200).json({
               success: true,
               message: 'Enjoy your token!',
               token: token,
