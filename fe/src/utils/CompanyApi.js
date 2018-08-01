@@ -1,10 +1,9 @@
 import axios from 'axios';
-import qs from 'qs';
 
 class CompanyApi {
-  async getCompanyById(id) {
+  async getCompanyByName(name) {
     const { data } = await axios.get(
-      `http://localhost:3000/api/companies/${id}`,
+      `http://localhost:3000/api/companies/${name}`,
     );
     console.log(data);
     return data;

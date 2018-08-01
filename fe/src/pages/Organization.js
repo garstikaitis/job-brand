@@ -9,7 +9,7 @@ class Organization extends React.Component {
   };
   async componentDidMount() {
     this.setState({
-      company: await CompanyApi.getCompanyById(this.props.match.params.id),
+      company: await CompanyApi.getCompanyByName(this.props.match.params.name),
       loading: false,
     });
   }
@@ -25,7 +25,7 @@ class Organization extends React.Component {
   render() {
     return (
       <div>
-        <Navbar title={this.state.company.name} />
+        <Navbar backUrl="/" title={this.state.company.name} />
         <div>{this.renderCompany()}</div>
       </div>
     );

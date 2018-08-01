@@ -21,8 +21,8 @@ class UserCompaniesWidget extends React.Component {
     });
   }
 
-  handleRedirect = id => {
-    window.location.href = `/companies/${id}`;
+  handleRedirect = name => {
+    window.location.href = `/companies/${name}`;
   };
 
   renderCompanies = () => {
@@ -36,7 +36,7 @@ class UserCompaniesWidget extends React.Component {
               </CardContent>
               <CardActions>
                 <Button
-                  onClick={() => this.handleRedirect(company._id)}
+                  onClick={() => this.handleRedirect(company.name)}
                   variant="contained"
                   color="secondary"
                 >

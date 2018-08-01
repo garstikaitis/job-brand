@@ -14,10 +14,10 @@ router.get('/companies', async (req, res) => {
   }
 });
 
-router.get('/companies/:companyId', async (req, res) => {
+router.get('/companies/:name', async (req, res) => {
   try {
-    const { companyId } = req.params;
-    const company = await Company.findById(companyId).populate('jobs');
+    const { name } = req.params;
+    const company = await Company.findOne({ name: name }).populate('jobs');
     return res.status(200).json(company);
   } catch (error) {
     console.log(error);
@@ -27,12 +27,12 @@ router.get('/companies/:companyId', async (req, res) => {
   }
 });
 
-router.post('/companies/:companyId/job', async (req, res) => {
+router.post('/companies/:name/job', async (req, res) => {
   try {
-    const { companyId } = req.params;
+    const { name } = req.params;
     const { title } = req.body;
     console.log(companyId);
-    const { job } = await Company.addJob(companyId, { title });
+    const { job } = await Company.addJob(name, { title });
     return res.status(201).json(job);
   } catch (error) {
     return res

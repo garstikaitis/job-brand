@@ -8,13 +8,11 @@ axios.defaults.headers['x-access-token'] = window.localStorage.getItem(
 class UserApi {
   async getUsers() {
     const { data } = await axios.get('http://localhost:3000/api/users');
-    console.log(data);
     return data;
   }
 
   async getUserById(id) {
     const { data } = await axios.get(`http://localhost:3000/api/users/${id}`);
-    console.log(data);
     return data;
   }
 

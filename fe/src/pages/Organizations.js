@@ -5,14 +5,7 @@ import AddCompanyDialog from '../components/dialogs/AddCompanyDialog';
 import UserCompaniesWidget from '../components/widgets/UserCompaniesWidget';
 import Navbar from '../components/common/Navbar';
 
-import {
-  Grid,
-  Button,
-  Typography,
-  SvgIcon,
-  IconButton,
-} from '../../node_modules/@material-ui/core';
-import CompanyApi from '../utils/CompanyApi';
+import { Grid, Button, Typography } from '../../node_modules/@material-ui/core';
 
 class Organizations extends Component {
   state = {
@@ -46,7 +39,7 @@ class Organizations extends Component {
   render() {
     return (
       <Grid item xs={12}>
-        <Navbar title="Choose organization" />
+        <Navbar backUrl="/" title="Choose organization" />
         <UserCompaniesWidget />
         <Button
           color="primary"

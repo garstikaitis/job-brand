@@ -25,7 +25,7 @@ class Root extends React.Component {
                 <Route exact path="/" component={Organizations} />
                 <Route exact path="/login" component={LoginPage} />
                 <Route exact path="/signup" component={SignupPage} />
-                <Route exact path="/companies/:id" component={Organization} />
+                <Route exact path="/companies/:name" component={Organization} />
               </Switch>
             </Router>
           </MuiThemeProvider>
