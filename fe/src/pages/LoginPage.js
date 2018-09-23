@@ -21,13 +21,15 @@ class LoginPage extends React.Component {
 
   handleSubmit = async e => {
     try {
-      const { email, password } = this.state;
       e.preventDefault();
+      const { email, password } = this.state;
       const { success, token } = await AuthApi.authenticate(email, password);
       console.log(success, token);
       if (success) {
         window.localStorage.setItem('x-access-token', token);
         window.location.href = '/';
+      } else {
+        console.log(success, token);
       }
     } catch (error) {}
   };

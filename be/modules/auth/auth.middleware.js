@@ -23,6 +23,7 @@ router.use((req, res, next) => {
       success: false,
       message: 'No token provided.',
     });
+    res.redirect('/login');
   }
 });
 

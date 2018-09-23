@@ -20,6 +20,8 @@ class AuthApi {
     );
     if (success) {
       return { success, token };
+    } else {
+      console.log(success);
     }
   }
   async signup(email, password) {
@@ -35,6 +37,11 @@ class AuthApi {
         },
       },
     );
+  }
+  async logout() {
+    const res = await axios.post('http://localhost:3000/api/logout');
+    window.localStorage.setItem('x-access-token', null);
+    return res.data;
   }
 }
 

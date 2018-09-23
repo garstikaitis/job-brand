@@ -16,13 +16,13 @@ class UserCompaniesWidget extends React.Component {
   };
   async componentDidMount() {
     this.setState({
-      user: await UserApi.getUserById('5b4f7781ec2ad5389bcf824a'),
+      user: await UserApi.getUserById('5b97c615aae9e7e153367bd6'),
       loading: false,
     });
   }
 
-  handleRedirect = name => {
-    window.location.href = `/companies/${name}`;
+  handleRedirect = slug => {
+    window.location.href = `/companies/${slug}`;
   };
 
   renderCompanies = () => {
@@ -36,7 +36,7 @@ class UserCompaniesWidget extends React.Component {
               </CardContent>
               <CardActions>
                 <Button
-                  onClick={() => this.handleRedirect(company.name)}
+                  onClick={() => this.handleRedirect(company.slug)}
                   variant="contained"
                   color="secondary"
                 >

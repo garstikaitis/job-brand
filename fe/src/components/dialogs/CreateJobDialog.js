@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {
+  Typography,
   Grid,
   Slide,
   DialogTitle,
@@ -9,15 +10,17 @@ import {
   DialogActions,
   Button,
   Dialog,
-  Typography,
-} from '../../../node_modules/@material-ui/core';
+} from '@material-ui/core';
 
-import UserApi from '../../utils/UserApi';
+import JobsApi from '../../utils/JobsApi';
 
-class AddCompanyDialog extends React.Component {
+class CreateJobDialog extends React.Component {
   state = {
-    name: '',
+    title: '',
   };
+  componentDidMount() {
+    console.log(this.props);
+  }
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value,
@@ -28,8 +31,8 @@ class AddCompanyDialog extends React.Component {
     return <Slide direction="up" {...props} />;
   };
 
-  addCompany = async () => {
-    await UserApi.addCompanyToUser('5b97c615aae9e7e153367bd6', this.state);
+  addJob = async () => {
+    await JobsApi.addJobToCompany(this.state, this.props.organization);
   };
 
   render() {
@@ -41,15 +44,31 @@ class AddCompanyDialog extends React.Component {
       >
         <Grid container spacing={0} direction="column" alignItems="center">
           <DialogTitle id="alert-dialog-slide-title">
-            {'Add a company'}
+            {'Create job opening'}
           </DialogTitle>
           <DialogContent>
             <Grid container spacing={40}>
               <Grid item xs={12}>
                 <TextField
-                  onChange={this.handleChange('name')}
-                  value={this.state.name}
-                  label="Company name"
+                  onChange={this.handleChange('title')}
+                  value={this.state.title}
+                  label="Job title"
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  onChange={this.handleChange('address')}
+                  value={this.state.address}
+                  label="Address"
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  onChange={this.handleChange('country')}
+                  value={this.state.country}
+                  label="Country"
                   fullWidth
                 />
               </Grid>
@@ -57,20 +76,9 @@ class AddCompanyDialog extends React.Component {
                 <TextField
                   onChange={this.handleChange('slug')}
                   value={this.state.slug}
-                  label="Company slug"
+                  label="Slug"
                   fullWidth
                 />
-              </Grid>
-              <Grid item xs={12}>
-                <Grid item xs={6}>
-                  <Typography>Example url:</Typography>
-                </Grid>
-                <Grid item xs={6}>
-                  <Typography>
-                    https://brand.io/
-                    {this.state.slug}
-                  </Typography>
-                </Grid>
               </Grid>
             </Grid>
           </DialogContent>
@@ -81,11 +89,7 @@ class AddCompanyDialog extends React.Component {
             >
               Cancel
             </Button>
-            <Button
-              variant="contained"
-              onClick={this.addCompany}
-              color="primary"
-            >
+            <Button variant="contained" onClick={this.addJob} color="primary">
               Save
             </Button>
           </DialogActions>
@@ -95,4 +99,4 @@ class AddCompanyDialog extends React.Component {
   }
 }
 
-export default AddCompanyDialog;
+export default CreateJobDialog;

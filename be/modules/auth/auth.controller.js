@@ -8,6 +8,7 @@ const router = express.Router();
 router.post('/authenticate', async (req, res) => {
   let passwordMatches;
   User.findOne({ email: req.body.email }, (err, user) => {
+    console.log(user);
     if (err) throw err;
     if (!user) {
       res.status(500).json({
@@ -42,6 +43,11 @@ router.post('/authenticate', async (req, res) => {
       );
     }
   });
+});
+
+router.post('/logout', async (req, res) => {
+  req.headers['x-access-token'] = null;
+  return res.json({ message: 'Logged out', redirect: '/login' });
 });
 
 export default router;

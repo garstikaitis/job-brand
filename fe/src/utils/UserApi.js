@@ -16,11 +16,12 @@ class UserApi {
     return data;
   }
 
-  async addCompanyToUser(userId, name) {
+  async addCompanyToUser(userId, { name, slug }) {
     const { data } = await axios.post(
       `http://localhost:3000/api/users/${userId}/companies`,
       qs.stringify({
         name,
+        slug,
       }),
       {
         headers: {

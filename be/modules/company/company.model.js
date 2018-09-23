@@ -4,13 +4,14 @@ const Schema = mongoose.Schema;
 
 const CompanySchema = new Schema({
   name: String,
+  slug: String,
   jobs: [JobSchema],
 });
 
-CompanySchema.statics.addJob = async function(name, args) {
+CompanySchema.statics.addJob = async function(slug, args) {
   const Job = mongoose.model('Job');
   const job = await new Job({ ...args });
-  await this.findOneAndUpdate({ name: name }, { $push: { jobs: job } });
+  await this.findOneAndUpdate({ slug }, { $push: { jobs: job } });
   return {
     job: await job.save(),
   };
